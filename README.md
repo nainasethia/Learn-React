@@ -1,6 +1,6 @@
-// DAY- 1 //
+# // DAY- 1 //
 
-📚 React Tutorial Overview
+# 📚 React Tutorial Overview
 
 Key Points
 
@@ -9,27 +9,27 @@ Key Points
 - Get familiar with Bootstrap integration for styling and layout.
 - Understand routing, state management, and advanced topics like React Query and authentication.
 
-🎬 Course & Project Overview
+# 🎬 Course & Project Overview
 
 - Build a production‑grade video‑game discovery app
 - Features: dark/light mode toggle, search, genre & platform filters, dynamic page titles, sorting, loading skeletons, deployment
 - Later modules cover: routing, state management, React Query, authentication, error handling, performance optimization
 
-📚 Prerequisites
+# 📚 Prerequisites
 
 - HTML, CSS, JavaScript fundamentals
 - Node.js v16+ (check with node -v)
 - VS Code (recommended) with Prettier extension for auto‑formatting
 - Node.js – runtime environment for executing JavaScript outside the browser.
 
-🧩 TypeScript Overview
+# 🧩 TypeScript Overview
 
 - Superset of JavaScript adding static typing
 - Catches errors at compile time, reducing runtime bugs
 - The course uses TypeScript for all components
 - Static typing – the practice of declaring variable types so the compiler can verify correct usage before execution.
 
-⚛️ What Is React?
+# ⚛️ What Is React?
 
 React – a JavaScript library for building dynamic, interactive user interfaces. Created at Facebook in 2011; now the most popular front‑end library.
 
@@ -43,13 +43,13 @@ React – a JavaScript library for building dynamic, interactive user interfaces
 - Each UI part (navbar, sidebar, game card, like button) is a component
 - Components form a tree with the root App component at the top
 
-🛠 Development Environment Setup
+# 🛠 Development Environment Setup
 
 -> Node Version Check
 
-# node -v
+= node -v
 
-# example output: v25.3.0
+= example output: v25.3.0
 
 - If version < 24, download the latest from nodejs.org
 - VS Code Configuration
@@ -58,7 +58,7 @@ React – a JavaScript library for building dynamic, interactive user interfaces
 
 - Enable Format on Save (settings.json: "editor.formatOnSave": true)
 
-🚀 Creating a React App
+# 🚀 Creating a React App
 
 -> Two common tools:
 
@@ -77,7 +77,7 @@ React – a JavaScript library for building dynamic, interactive user interfaces
 
 npm create vite@latest # specify version with @7.2.5 for exact match
 
-# Choose project name, select **react**, then **typescript**
+= Choose project name, select **react**, then **typescript**
 
 cd <project‑folder>
 npm install
@@ -85,7 +85,7 @@ npm run dev
 
 -Development server runs at http://localhost:5173 (port may vary)
 
-📁 Project Structure
+# 📁 Project Structure
 
 project-root/
 │
@@ -101,7 +101,7 @@ project-root/
 ├── tsconfig.json # TypeScript configuration
 └── vite.config.ts
 
-📁 Project Structure Overview
+# 📁 Project Structure Overview
 
 - node_modules/ – third‑party libraries (React, etc.) – do not edit
 - public/ – static assets (images, videos)
