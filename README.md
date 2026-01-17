@@ -18,7 +18,7 @@ Key Points
 # 📚 Prerequisites
 
 - HTML, CSS, JavaScript fundamentals
-- Node.js v16+ (check with node -v)
+- Node.js v24+ (check with node -v)
 - VS Code (recommended) with Prettier extension for auto‑formatting
 - Node.js – runtime environment for executing JavaScript outside the browser.
 
