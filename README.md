@@ -460,7 +460,7 @@ export default function ListGroup({
 
 ## Creating an Arrow‑Function Component
 
-``tsx
+```tsx
 // src/components/Alert.tsx
 export const Alert = () => (
 
@@ -482,10 +482,9 @@ export const Alert = () => (
 
 ## Markup basics
 
-- An alert is a <div> with two classes:
-
--- alert — base class
--- alert‑<color> — determines background (e.g., alert-primary → blue)
+### An alert is a < div > with two classes:
+- alert — base class
+- alert‑ < color > — determines background (e.g., alert-primary → blue)
 
 ## Making the alert dynamic
 
