@@ -157,7 +157,7 @@ import App from "./App";
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>
+  </React.StrictMode>,
 );
 ```
 
@@ -339,3 +339,188 @@ return (
 const getMessage = (count: number) =>
   count === 0 ? <p>No items found</p> : null;
 ```
+
+# // DAY- 1 //
+
+# 🖱️ Event Handling in React 🎯
+
+## onClick Prop
+
+> React elements receive event handlers as props, e.g., onClick.
+
+```tsx
+<li onClick={() => console.log("clicked")}>Item</li>
+```
+
+## Inline vs. Separate Handlers
+
+- **Inline** works for trivial actions.
+- For complex logic, define a **named handler** and pass its reference.
+
+```tsx
+const handleClick = (item: string) => console.log(item);
+...
+<li onClick={() => handleClick(item)}>Item</li>
+```
+
+## Synthetic Events & TypeScript Types
+
+- React wraps native events in a SyntheticEvent for cross‑browser consistency.
+- Type the event parameter to get IntelliSense and safety.
+
+```tsx
+import { MouseEvent } from 'react';
+
+const handleClick = (e: MouseEvent<HTMLLIElement>) => {
+  console.log(e.clientX, e.clientY);
+};
+...
+<li onClick={handleClick}>Item</li>
+```
+
+- Without type annotation, TypeScript reports “parameter implicitly has an 'any' type”.
+
+# 📦 State Management with useState Hook 🧩
+
+## Declaring State
+
+```tsx
+import { useState } from "react";
+
+const [selectedIndex, setSelectedIndex] = useState(-1);
+```
+
+- The hook returns a tuple: current state value + updater function.
+
+# 📦 State Management with useState Hook 🧩
+
+## Declaring State
+
+```tsx
+import { useState } from "react";
+
+const [selectedIndex, setSelectedIndex] = useState(-1);
+```
+
+- The hook returns a **tuple**: current state value + updater function.
+
+## Updating State & Re‑render
+
+```tsx
+const handleSelect = (index: number) => setSelectedIndex(index);
+```
+
+- Calling the updater notifies React, causing a re‑render where the DOM reflects the new state.
+
+## Independent State per Component Instance
+
+- Each component instance maintains its own state slice.
+- Adding a second <ListGroup /> creates a separate selectedIndex that does not interfere with the first.
+
+# 📤 Props, Interfaces & Component Reusability 📦
+
+## Defining a Props Interface
+
+```tsx
+interface ListGroupProps {
+  items: string[];
+  heading: string;
+  onSelectItem?: (item: string) => void; // optional callback
+}
+```
+
+## Passing Props from Parent
+
+```tsx
+<ListGroup
+  items={cities}
+  heading="Cities"
+  onSelectItem={(item) => console.log(item)}
+/>
+```
+
+## Destructuring Props
+
+```tsx
+export default function ListGroup({
+  items,
+  heading,
+  onSelectItem,
+}: ListGroupProps) {
+  // use items, heading, onSelectItem directly
+}
+```
+
+## Immutability vs. Mutability
+
+> Props are **immutable**—they should never be reassigned inside the child component.
+> State is **mutable** via its updater function, allowing the component to reflect changes over time.
+
+# 🌟 Children Prop & Simple Alert Component 📢
+
+## Creating an Arrow‑Function Component
+
+``tsx
+// src/components/Alert.tsx
+export const Alert = () => (
+
+  <div className="alert alert-warning" role="alert">
+    This is an alert message.
+  </div>
+);
+```
+- No explicit import React needed with modern JSX transforms.
+- The component can be used like any other JSX element:
+
+```tsx
+<div>
+  <Alert />
+</div>
+```
+
+# 🚨 Bootstrap Alert Component
+
+## Markup basics
+
+- An alert is a <div> with two classes:
+
+-- alert — base class
+-- alert‑<color> — determines background (e.g., alert-primary → blue)
+
+## Making the alert dynamic
+
+| Step | What to do                                                    |
+| ---- | ------------------------------------------------------------- |
+| 1️⃣   | Define a props interface.                                     |
+| 2️⃣   | Use the `children` prop instead of a custom `text` prop.      |
+| 3️⃣   | Type `children` as `ReactNode` to allow plain strings or JSX. |
+| 4️⃣   | Render `children` inside the alert `<div>`.                   |
+
+> **children** – a special prop that contains the content placed between a component’s opening and closing tags.
+
+```tsx
+// src/components/Alert.tsx
+import { ReactNode } from "react";
+
+interface AlertProps {
+  children: ReactNode; // accepts string or JSX
+  type?: "primary" | "secondary" | "danger" | "success"; // optional colour
+}
+
+export const Alert = ({ children, type = "primary" }: AlertProps) => (
+  <div className={`alert alert-${type}`} role="alert">
+    {children}
+  </div>
+);
+```
+
+# Using the component in App.tsx
+
+```tsx
+<Alert type="danger">
+  <strong>Warning!</strong> Something went wrong.
+</Alert>
+```
+
+- Passing **HTML/JSX** works because children is typed as ReactNode.
+- If you kept text: string, the above would cause a TypeScript error.
