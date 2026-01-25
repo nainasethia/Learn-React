@@ -340,7 +340,7 @@ const getMessage = (count: number) =>
   count === 0 ? <p>No items found</p> : null;
 ```
 
-# // DAY- 1 //
+# // DAY- 3 //
 
 # 🖱️ Event Handling in React 🎯
 
