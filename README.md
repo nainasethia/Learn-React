@@ -1,6 +1,6 @@
-# // DAY- 1 //
+# Learn-Basic-React
 
-# 📚 React Tutorial Overview
+# 📚 React Overview
 
 Key Points
 
@@ -96,7 +96,6 @@ project-root/
 
 ```
 
-# // DAY- 2 //
 
 # 🧑‍💻 First Component: Message
 
@@ -340,7 +339,6 @@ const getMessage = (count: number) =>
   count === 0 ? <p>No items found</p> : null;
 ```
 
-# // DAY- 3 //
 
 # 🖱️ Event Handling in React 🎯
 
@@ -525,7 +523,6 @@ export const Alert = ({ children, type = "primary" }: AlertProps) => (
 - Passing **HTML/JSX** works because children is typed as ReactNode.
 - If you kept text: string, the above would cause a TypeScript error.
 
-# // DAY- 4 //
 
 # 🔧 React DevTools
 
