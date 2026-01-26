@@ -463,12 +463,12 @@ export default function ListGroup({
 ```tsx
 // src/components/Alert.tsx
 export const Alert = () => (
-
   <div className="alert alert-warning" role="alert">
     This is an alert message.
   </div>
 );
 ```
+
 - No explicit import React needed with modern JSX transforms.
 - The component can be used like any other JSX element:
 
@@ -483,6 +483,7 @@ export const Alert = () => (
 ## Markup basics
 
 ### An alert is a < div > with two classes:
+
 - alert — base class
 - alert‑ < color > — determines background (e.g., alert-primary → blue)
 
@@ -523,3 +524,140 @@ export const Alert = ({ children, type = "primary" }: AlertProps) => (
 
 - Passing **HTML/JSX** works because children is typed as ReactNode.
 - If you kept text: string, the above would cause a TypeScript error.
+
+# // DAY- 4 //
+
+# 🔧 React DevTools
+
+- Browser extension (Chrome, Firefox, Edge) for inspecting React apps.
+- Adds two new tabs in the developer console: **Components** and **Profiler**.
+
+## Core Features
+
+| Feature        | Description                                                            |
+| -------------- | ---------------------------------------------------------------------- |
+| Component tree | Shows component hierarchy (e.g., `App → Alert`).                       |
+| Props panel    | Displays current prop values, including `children`.                    |
+| Source view    | Click an icon to jump to the component’s source file.                  |
+| DOM selector   | Select a component → highlights its real DOM node in the Elements tab. |
+| Search         | Locate a component by name in large applications.                      |
+
+> **Profiler** – measures render timings to help spot performance bottlenecks.
+
+# 🎛️ Reusable Bootstrap Button Component
+
+## Basic markup
+
+```tsx
+<button class="btn btn-primary">Label</button>
+```
+
+## Step‑by‑step implementation
+
+1️⃣ **Props interface** – include children, onClick, and color.
+2️⃣ **Default colour** – primary when the prop is omitted.
+3️⃣ **Optional colour prop** – mark with ?.
+4️⃣ **Union type** – restrict colour values to valid Bootstrap options.
+
+```tsx
+// src/components/Button.tsx
+interface ButtonProps {
+  children: string; // button label
+  onClick?: () => void; // optional handler
+  color?: "primary" | "secondary" | "danger" | "success"; // optional
+}
+
+export const Button = ({
+  children,
+  onClick,
+  color = "primary",
+}: ButtonProps) => (
+  <button className={`btn btn-${color}`} onClick={onClick}>
+    {children}
+  </button>
+);
+```
+
+## Using the button
+
+```tsx
+<Button color="secondary" onClick={() => console.log("clicked")}>
+  My Button
+</Button>
+```
+
+- **onClick** is **not** implemented inside the button; the parent supplies the behaviour, keeping the component reusable.
+
+## TypeScript techniques demonstrated
+
+| Technique                                         | Purpose                                           |
+| ------------------------------------------------- | ------------------------------------------------- |
+| Default value (`color = "primary"`)               | Provides a fallback when the prop isn’t supplied. |
+| Optional prop (`color?`)                          | Prevents the compiler from requiring the prop.    |
+| String-literal union (`"primary" \| "secondary"`) | Restricts the prop to specific allowed values.    |
+
+# 📦 Controlling Alert Visibility with State
+
+## State hook in App.tsx
+
+```tsx
+import { useState } from "react";
+
+const App = () => {
+  const [alertVisible, setAlertVisible] = useState(false);
+
+  return (
+    <>
+      <Button onClick={() => setAlertVisible(true)}>Show Alert</Button>
+
+      {alertVisible && (
+        <Alert onClose={() => setAlertVisible(false)} type="warning">
+          This is a dismissable alert.
+        </Alert>
+      )}
+    </>
+  );
+};
+```
+
+- useState(false) initializes the alert as hidden.
+- **Conditional rendering**: alertVisible && <Alert … /> ensures the alert only appears when the state is true.
+- Clicking the **Show Alert** button calls setAlertVisible(true), triggering a re‑render that displays the alert.
+
+## Adding a **dismiss** button to the alert
+
+```tsx
+// src/components/Alert.tsx (extended)
+interface AlertProps {
+  children: ReactNode;
+  type?: string;
+  onClose?: () => void; // callback when user dismisses
+}
+
+export const Alert = ({ children, type = "primary", onClose }: AlertProps) => (
+  <div className={`alert alert-${type} alert-dismissible`} role="alert">
+    {children}
+    <button
+      type="button"
+      className="btn-close"
+      aria-label="Close"
+      onClick={onClose}
+    ></button>
+  </div>
+);
+```
+
+- The **close** button uses Bootstrap’s btn-close class and invokes the onClose callback supplied by the parent.
+- The parent (App) passes () => setAlertVisible(false) to hide the alert.
+
+# 🛠️ Summary of TypeScript Enhancements
+
+| Enhancement            | Example                    | Benefit                                                            |
+| ---------------------- | -------------------------- | ------------------------------------------------------------------ |
+| Default prop value     | `color = "primary"`        | Reduces boilerplate in parent components.                          |
+| Optional prop (`?`)    | `color?: …`                | Allows omission without compiler errors.                           |
+| String-literal union   | `"primary" \| "secondary"` | Restricts the prop to specific allowed values.                     |
+| ReactNode for children | `children: ReactNode`      | Supports plain text and JSX (e.g., `<strong>`).                    |
+| Callback props         | `onClose?: () => void`     | Enables child-to-parent communication for actions like dismissing. |
+
+These patterns create **type‑safe, reusable UI components** that integrate smoothly with Bootstrap’s styling and React’s declarative rendering model.
