@@ -388,18 +388,6 @@ import { useState } from "react";
 const [selectedIndex, setSelectedIndex] = useState(-1);
 ```
 
-- The hook returns a tuple: current state value + updater function.
-
-# 📦 State Management with useState Hook 🧩
-
-## Declaring State
-
-```tsx
-import { useState } from "react";
-
-const [selectedIndex, setSelectedIndex] = useState(-1);
-```
-
 - The hook returns a **tuple**: current state value + updater function.
 
 ## Updating State & Re‑render
